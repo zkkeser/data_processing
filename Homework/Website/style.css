@@ -1,5 +1,108 @@
 /* Stylesheet CSS */
+html{height: 100%;}
+body{height: 100%;}
 
-p{
-	color: red;
+
+#menu {
+    width: 1150px;
+    height: 60px;
+    font-family: Arial,Tahoma, Geneva, sans-serif;
+    font-weight: bold;
+    background-color: #19488E;
 }
+#side{
+	float:left;
+	padding: 10px;
+	font-family: Arial;
+	background-color: #E3E3E3;
+	width: 200px;
+	height: 100%;
+}
+
+#mails{
+	position:absolute;
+	top: 80px;
+	left: 235px;
+	float:right;
+	height: 100%;
+	width: 926px;
+	border: 2px solid red;
+}
+
+table{
+	border: none;
+	width: 100%;
+	text-align: left;
+	font-family: Arial;
+}
+
+td{
+	border: none;
+}
+td.description{
+	
+	color: #19488E;
+	font-weight: bold;
+}
+#searchbox{
+	background-color: white;
+	height: 30px;
+	width: 190px;
+	border: 1px solid gray;
+	text-align: left;
+	vertical-align: middle;
+	line-height: 30px;
+	color: #E3E3E3;
+}
+
+#searchbox li{
+	display: inline;
+}
+#searchbox ul{
+	height: auto;
+	padding: 0px 0px;
+	margin: 0px;
+}
+
+#side ul{
+	list-style-type: none;	
+}
+
+#logo{
+	margin-left: 0px;
+}
+#name{
+	position: absolute;
+	top: 10px;
+	left: 990px;
+	font-size: 14px;
+	}
+#pic{
+	position: absolute;
+	top: -12px;
+	left: 1100px;
+	
+}
+img.profile{
+	height: 60px;
+	width: 60px;
+}
+img.search{
+	position: absolute;
+	top: 82px;
+	left: 180px;
+}
+#menu ul{
+	height: auto;
+	padding: 20px 0px;
+	margin: 0px;
+}
+
+#menu li {
+	display: inline;
+	padding: 20px;
+	color: white;
+}
+
+
+
