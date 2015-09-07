@@ -1,5 +1,5 @@
-# Name :
-# Student number :
+# Name : Kubilay Keser
+# Student number : 10610286
 '''
 This module contains an implementation of split_string.
 '''
@@ -15,41 +15,7 @@ This module contains an implementation of split_string.
 # code. Never, ever mix tabs and spaces - that is a source of bugs and
 # failures in Python programs.
 
-"""
-X =
-Y = []     <--- dit is de lijst die als laatst geprint wordt
 
-je hebt een woord = alabama
-je seperatoren zijn b en m
-
-
-kijk naar de eerste letter = a
-is het een b ? is het een m?
-nee
-
-voeg toe aan X
-
-volgende letter is L ook geen b of m dus voeg toe aan X
-volgende letter is A ook geen b of m dus voeg toe aan X
-
-X is nu dus ala
-
-volgende letter is b, het is wel een b of een m dus:
-voeg X toe aan de lijst Y      <--- Y wordt dan Y = [ala]
-maak X leeg door te zeggen X = 0
-en ga door tot alle letters zijn geweest.
-
-
-laatste letter is a: geen b of m dus voeg toe aan X
-einde loop want er zijn geen letters meer
-
-laatste check:
-x=true ? (dus zit er wat in?)
-zo ja: voeg wat er in X zit toe aan Y
-
-uiteindelijk is je Y dan Y = [ala,a,a]
- 
-"""
 
 def split_string(source, separators):
     x= []

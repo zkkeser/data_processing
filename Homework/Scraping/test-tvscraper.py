@@ -2,6 +2,7 @@
 '''
 Test the scraper that collects the highest ranking TV schows.
 '''
+
 import unittest
 import csv
 import StringIO
