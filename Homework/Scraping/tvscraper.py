@@ -27,13 +27,12 @@ def extract_tvseries(dom):
     - Actors/actresses (comma separated if more than one)
     - Runtime (only a number!)
     '''
-    for e in dom.by_tag("td.title")[:5]: # Top 5 reddit entries.
+    for e in dom.by_tag("td.title")[:50]: # Top 5 reddit entries.
         sublist = []
         #Title
         for a in e.by_tag("a")[:1]: # First <a class="title"> in entry.
-            title = str(plaintext(a.content))
+            title = plaintext(a.content).encode('utf-8')
             sublist.append(title)
-            print title
         #Rating
         for a in e.by_tag("div.user_rating")[:1]: # First <a class="title"> in entry.
             user_rating =str(plaintext(a.content))[11:-4]
@@ -45,14 +44,15 @@ def extract_tvseries(dom):
             sublist.append(good_genre)
         #Actors
         for a in e.by_tag("span.credit")[:1]: # First <a class="title"> in entry.
-            actors = str(plaintext(a.content))[6:]
-            sublist.append(actors)
+            bad_actors = plaintext(a.content).encode('utf-8')
+            good_actors = bad_actors[6:]
+            sublist.append(good_actors)
         #Runtime
         for a in e.by_tag("span.runtime")[:1]:
             runtime = int(plaintext(a.content)[:-6])
             sublist.append(runtime)
         tvseries.append(sublist)
-    #print tvseries
+    
     # ADD YOUR CODE HERE TO EXTRACT THE ABOVE INFORMATION ABOUT THE
     # HIGHEST RANKING TV-SERIES
     # NOTE: FOR THIS EXERCISE YOU ARE ALLOWED (BUT NOT REQUIRED) TO IGNORE
