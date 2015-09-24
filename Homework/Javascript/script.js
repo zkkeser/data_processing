@@ -1,40 +1,40 @@
 /**
  * Created by Kubilay on 22-Sep-15.
  */
-	//These are the arrays with data. This assignment was already excruciatingly hard for me
-	//So I really didn't have the time to mess around with the getElementByID (which didn't work
-	//properly for me)
+	//Get the data from textarea
 
-	var arrayX = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,
-	38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,
-	76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,
-	111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,
-	140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,
-	169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,
-	198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,
-	227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,
-	256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,
-	285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,
-	314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,
-	343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365];
+	var rawData = document.getElementById("rawdata").value
 
-	var arrayY = [184,204,216,211,209,228,246,252,253,244,240,192,175,177,165,178,194,202,220,193,209,207,192,222,211,
-    152,161,156,166,180,178,157,162,185,136,184,180,188,230,215,177,140,135,151,126,153,159,170,140,128,156,166,185,174,
-	153,109,95,82,98,129,128,126,129,122,133,124,110,92,123,83,91,80,90,118,135,113,91,64,88,95,49,31,24,14,10,15,53,91,
-	67,49,49,99,77,94,68,48,79,78,106,125,124,91,103,128,128,100,79,52,29,34,56,65,76,47,101,59,80,38,58,72,82,137,133,
-	82,102,110,60,103,83,59,33,16,37,15,4,-13,68,56,83,77,72,45,44,44,57,55,63,53,20,31,55,67,72,72,54,45,99,102,67,77,
-	90,81,74,65,63,68,98,89,87,83,82,91,107,84,75,76,103,90,139,157,113,113,95,127,92,53,68,128,178,88,126,93,93,86,93,
-	115,69,73,89,117,113,91,111,91,86,95,94,113,117,132,142,181,196,136,155,128,200,230,134,129,144,152,171,174,121,155,
-	204,150,139,126,118,147,142,133,158,170,194,222,155,162,194,161,191,256,175,181,167,144,149,162,140,137,147,174,199,
-	157,199,153,158,189,165,158,154,165,161,177,177,220,318,189,189,172,150,208,240,274,213,195,175,177,227,166,153,163,
-	185,153,151,215,240,250,218,232,242,273,331,331,291,327,282,238,258,196,176,226,287,204,196,213,211,251,256,205,214,
-	254,231,217,233,183,209,197,189,176,181,194,220,242,300,215,250,284,270,230,243,252,254,230,284,254,221,166,152,168,
-   225,249,253,265,259,231,199,252,185,209,236,253,265,195,188,171,170,169,169,185,196,197,200];
+
+	//Split rawdata on lines
+	var rawDataLines = [];
+	var rawDataLines = rawData.split(/\r\n|\n/);
+	console.log(rawDataLines.length)
+	//Deletes the last item from the array because this was an empty one.
+	rawDataLines.pop(); //http://www.w3schools.com/jsref/jsref_pop.asp
+
+
+	arrayX = []
+	arrayY = []
+	for (i in rawDataLines){
+		//Splits the lines into two parts, the date and the temperature
+		var splittedLine = [];
+  		splittedLine = rawDataLines[i].split(',')
+
+  		splittedLine[0] = splittedLine[0].trim(); //http://www.w3schools.com/jsref/jsref_trim_string.asp
+  		splittedLine[1] = splittedLine[1].trim();
+  		splittedLine[0] = new Date(splittedLine[0]);
+  		splittedLine[1] = parseInt(splittedLine[1]); //http://www.w3schools.com/jsref/jsref_parseint.asp
+
+  		arrayX.push(splittedLine[0]);
+  		arrayY.push(splittedLine[1]);
+
+  	}
 
 	//Linear Transformation
 	function createTransform(domain,range){
 	var alpha =(range[1]-range[0])/(domain[1]-domain[0]);
-    var beta=(range[0]- alpha*domain[0]);
+    var beta= range[0]- alpha*domain[0];
 
     return function(x){
     return alpha * x + beta;
@@ -42,13 +42,11 @@
 }
 	//Get highest and lowest values of the data
 	var minimumY = Math.min.apply( Math, arrayY );
-	console.log(minimumY);
 	var maximumY = Math.max.apply( Math, arrayY );
-	console.log(maximumY);
 
 
 	//Transform X and Y
-	var transformX = createTransform([1,365],[0,1280]);
+	var transformX = createTransform([0,366],[0,1280]);
 	var transformY = createTransform([maximumY,minimumY],[0,720]);
 
 	//
@@ -75,9 +73,9 @@
 
 
 	//This function feeds the array to the draw function
-	function feed(arrayX,arrayY){
-		for (i=0; i<arrayX.length ; i++)
-			draw(arrayX[i],arrayY[i],arrayX[i+1],arrayY[i+1])
+	function feed(arrayY){
+		for (i=0; i<arrayY.length ; i++)
+			draw(i,arrayY[i],i+1,arrayY[i+1])
 	}
 
 	//This function draws the line from point to point
@@ -89,10 +87,11 @@
 
 		drawing.moveTo(beginX,beginY);
 		drawing.lineTo(endX,endY);
+		drawing.strokeStyle = '#295BFF';
 		drawing.stroke();
 	}
 
 
 
 
-	feed(arrayX,arrayY)
+	feed(arrayY)

@@ -3,3 +3,7 @@ canvas{
     margin: 50px;
 }
 
+#rawdata{
+      display: none;
+}
+
