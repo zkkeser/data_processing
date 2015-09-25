@@ -45,35 +45,34 @@
 	var minimumY = Math.min.apply(Math,arrayY);
 	var maximumY = Math.max.apply(Math,arrayY);
 
-
+	console.log(arrayY.length)
+	console.log(arrayX.length)
 	//Transform X and Y
-	var transformX = createTransform([0,365],[0,1280]);
-	var transformY = createTransform([maximumY,minimumY],[0,720]);
+	var transformX = createTransform([0,365],[50,950]);
+	var transformY = createTransform([maximumY,minimumY],[50,350]);
 
 	//
 	var paper = document.getElementById('canvas');
 	var drawing = paper.getContext('2d');
 
-	drawing.beginPath();
 
-	drawing.strokeStyle = '#000000';
+	drawing.beginPath();
 
 	//Draw the X axis
 	xaxisXleft = transformX(0);
-	xaxisYleft = transformY(0);
+	xaxisYleft = transformY(minimumY);
 	xaxisXright = transformX(365);
-	xaxisYright = transformY(0);
+	xaxisYright = transformY(minimumY);
 	drawing.moveTo(xaxisXleft,xaxisYleft);
 	drawing.lineTo(xaxisXright,xaxisYright);
-	
 
 	//Draw the Y axis
-	yaxisXtop = 0;
-	yaxisYtop = 0;
-	yaxisXbottom = 0;
-	yaxisYbottom = 720;
-	drawing.moveTo(0,0);
-	drawing.lineTo(0,720);
+	yaxisXtop = transformX(0);
+	yaxisYtop = transformY(minimumY);
+	yaxisXbottom = transformX(0);
+	yaxisYbottom = transformY(maximumY);
+	drawing.moveTo(yaxisXtop,yaxisYtop);
+	drawing.lineTo(yaxisXbottom,yaxisYbottom);
 	drawing.stroke();
 
 	drawing.closePath()
