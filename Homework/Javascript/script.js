@@ -41,17 +41,20 @@
     return alpha * x + beta;
 }
 }
+
 	//Get highest and lowest values of the data
 	var minimumY = Math.min.apply(Math,arrayY);
 	var maximumY = Math.max.apply(Math,arrayY);
 
-	console.log(arrayY.length)
-	console.log(arrayX.length)
 	//Transform X and Y
-	var transformX = createTransform([0,365],[50,950]);
+	var transformX = createTransform([0,365],[80,1000]);
 	var transformY = createTransform([maximumY,minimumY],[50,350]);
 
-	//
+	//Transforms X for the months
+	var transformMonthX = createTransform([0,12],[80,1000])
+	//Transforms Y for the temperature
+	var transformTempY = createTransform([9,0],[50,350])
+
 	var paper = document.getElementById('canvas');
 	var drawing = paper.getContext('2d');
 
@@ -99,6 +102,38 @@
 		drawing.closePath();
 	}
 
+	//This loop draws our ticks and months on the x-axis
+	var months = ['January','Februari', 'March', 'April' , 'May','June','July','August','September','October','November','December']
+	for (i=0; i < months.length; i++ ){
+		drawing.beginPath();
+		drawing.fillText(months[i],transformMonthX(i)+5, transformY(minimumY)+15)
+		drawing.moveTo(transformMonthX(i),transformY(minimumY));
+		drawing.lineTo(transformMonthX(i),transformY(-5))
+		drawing.stroke();
+		drawing.closePath();
+	}
 
+	//This loop draws our ticks and temps on the y-axis
+	var temp = [minimumY,0,5,10,15,20,25,30,maximumY]
+	for (i=0; i < temp.length; i++ ){
+		drawing.beginPath();
+		drawing.fillText(temp[i],transformX(0) - 28, transformY(temp[i]))
+		drawing.moveTo(transformX(0),transformY(temp[i]))
+		drawing.lineTo(transformX(0)-5,transformY(temp[i]))
+		drawing.stroke();
+		drawing.closePath();
+	}
 	feed(arrayY)
 
+	// Source for the text-rotation code
+	// http://stackoverflow.com/questions/3167928/drawing-rotated-text-on-a-html5-canvas
+	drawing.save();
+	drawing.translate(-300, 475);
+	drawing.rotate(-Math.PI/2);
+	drawing.textAlign = "center";
+	drawing.fillText("Temperature in Celsius", 300, 320);
+	drawing.restore();
+	
+	drawing.beginPath()
+	drawing.fillText("")
+	drawing.closePath()
