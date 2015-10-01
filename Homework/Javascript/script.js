@@ -117,9 +117,9 @@
 	var temp = [minimumY,0,5,10,15,20,25,30,maximumY]
 	for (i=0; i < temp.length; i++ ){
 		drawing.beginPath();
-		drawing.fillText(temp[i],transformX(0) - 28, transformY(temp[i]))
-		drawing.moveTo(transformX(0),transformY(temp[i]))
-		drawing.lineTo(transformX(0)-5,transformY(temp[i]))
+		drawing.fillText(temp[i],transformX(0) - 28, transformY(temp[i]));
+		drawing.moveTo(transformX(0),transformY(temp[i]));
+		drawing.lineTo(transformX(0)-5,transformY(temp[i]));
 		drawing.stroke();
 		drawing.closePath();
 	}
@@ -134,6 +134,32 @@
 	drawing.fillText("Temperature in Celsius", 300, 320);
 	drawing.restore();
 	
-	drawing.beginPath()
-	drawing.fillText("")
-	drawing.closePath()
+	drawing.beginPath();
+	drawing.fillText("Date in months", 500,400);
+	drawing.closePath();
+
+
+
+	var glass = document.getElementById("canvas2");
+	var drawing2 = glass.getContext("2d");
+
+function mouseHover(event) {
+    console.info(event.offsetX, event.offsetY);
+    glass.innerHTML =
+        "Temp:" + arrayY[event.offsetX] + ", date:" + arrayX[event.offsetX];
+
+    glass.style.left = event.screenX;
+    glass.style.top = event.screenY;
+    }
+
+    var lastEvent;
+	var timer;
+	glass.onmousemove = function (event) {
+    lastEvent = event;
+
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+        mouseHover(lastEvent);
+    }, 0);
+};
+

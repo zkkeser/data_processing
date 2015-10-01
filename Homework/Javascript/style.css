@@ -1,7 +1,15 @@
 canvas{
-
+    z-index: 1;
+    position: absolute;
     border: 1px dotted;
 }
+#canvas2{
+    z-index: 1000;
+    margin-top: 50px;
+    margin-left: 80px;
+    position: absolute;
+    border: 1px solid;
+    }
 
 #rawdata{
       display: none;
