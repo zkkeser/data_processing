@@ -50,6 +50,9 @@
 	var transformX = createTransform([0,365],[80,1000]);
 	var transformY = createTransform([maximumY,minimumY],[50,350]);
 
+	//Transforms interactive canvas
+	var transformIntX = createTransform([0,365],[0,919])
+	var transformIntY = createTransform([maximumY,minimumY],[0,299])
 	//Transforms X for the months
 	var transformMonthX = createTransform([0,12],[80,1000])
 	//Transforms Y for the temperature
@@ -150,11 +153,27 @@ function mouseHover(event) {
 
     glass.style.left = event.screenX;
     glass.style.top = event.screenY;
-    }
+    locationTemp = arrayY[Math.round(event.offsetX/920 * 365)]
 
-    var lastEvent;
-	var timer;
-	glass.onmousemove = function (event) {
+
+
+	drawing2.clearRect(0,0,glass.width, glass.height)
+    drawing2.beginPath()
+	drawing2.arc(event.offsetX,transformIntY(locationTemp),10,0,2*Math.PI);
+	drawing2.stroke()
+	drawing2.closePath()
+	drawing2.beginPath()
+	drawing2.arc(event.offsetX,transformIntY(locationTemp),5,0,2*Math.PI);
+
+    drawing2.stroke()
+    drawing2.closePath()
+
+
+}
+
+var lastEvent;
+var timer;
+glass.onmousemove = function (event) {
     lastEvent = event;
 
     clearTimeout(timer);
