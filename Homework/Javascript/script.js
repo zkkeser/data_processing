@@ -14,6 +14,7 @@
 
 
 	arrayX = []
+	dateX = []
 	arrayY = []
 	for (i in rawDataLines){
 		//Splits the lines into two parts, the date and the temperature
@@ -22,6 +23,7 @@
 
   		splitLine[0] = splitLine[0].trim(); //http://www.w3schools.com/jsref/jsref_trim_string.asp
   		splitLine[1] = splitLine[1].trim();
+  		dateX.push(splitLine[0]);
   		splitLine[0] = new Date(splitLine[0]);
   		splitLine[1] = parseInt(splitLine[1]); //http://www.w3schools.com/jsref/jsref_parseint.asp
   		//Cchange temp from xxx to xx,x
@@ -147,26 +149,78 @@
 	var drawing2 = glass.getContext("2d");
 
 function mouseHover(event) {
-    console.info(event.offsetX, event.offsetY);
+    //console.info(event.offsetX, event.offsetY);
     glass.innerHTML =
         "Temp:" + arrayY[event.offsetX] + ", date:" + arrayX[event.offsetX];
 
     glass.style.left = event.screenX;
     glass.style.top = event.screenY;
-    locationTemp = arrayY[Math.round(event.offsetX/920 * 365)]
+    whatDayIsIt = Math.round(event.offsetX/920*365)
+    locationTemp = arrayY[whatDayIsIt];
 
 
 
-	drawing2.clearRect(0,0,glass.width, glass.height)
-    drawing2.beginPath()
+	drawing2.clearRect(0,0,glass.width, glass.height);
+	//Draw two circles
+    drawing2.beginPath();
 	drawing2.arc(event.offsetX,transformIntY(locationTemp),10,0,2*Math.PI);
+	drawing2.stroke();
+	drawing2.closePath();
+	drawing2.beginPath();
+	drawing2.arc(event.offsetX,transformIntY(locationTemp),5,0,2*Math.PI);
 	drawing2.stroke()
 	drawing2.closePath()
-	drawing2.beginPath()
-	drawing2.arc(event.offsetX,transformIntY(locationTemp),5,0,2*Math.PI);
 
+	drawing2.beginPath()
+	//Line top
+	drawing2.moveTo(event.offsetX,transformIntY(maximumY));
+	drawing2.lineTo(event.offsetX,transformIntY(locationTemp)-10);
+	//line bottom
+	drawing2.moveTo(event.offsetX,transformIntY(minimumY));
+	drawing2.lineTo(event.offsetX,transformIntY(locationTemp)+10);
+	//line left
+	drawing2.moveTo(0,transformIntY(locationTemp));
+	drawing2.lineTo(event.offsetX -10,transformIntY(locationTemp));
+	//line right
+	drawing2.moveTo(919,transformIntY(locationTemp));
+	drawing2.lineTo(event.offsetX +10,transformIntY(locationTemp));
+    //Text for current date and time
     drawing2.stroke()
     drawing2.closePath()
+    if (whatDayIsIt > 60 && locationTemp < 30) {
+        drawing2.beginPath()
+        drawing2.fillStyle = "black"
+        drawing2.fillRect(event.offsetX - 135, transformIntY(locationTemp) - 15, 113,15)
+        drawing2.closePath()
+        drawing2.beginPath()
+        drawing2.fillStyle = "white"
+        drawing2.fillText(locationTemp +" "+ "°C", event.offsetX - 130 , transformIntY(locationTemp) - 5)
+        drawing2.fillText(dateX[whatDayIsIt],event.offsetX - 80,transformIntY(locationTemp) -5)
+        drawing2.closePath()}
+    else if(whatDayIsIt > 60 && locationTemp > 30) {
+        drawing.beginPath()
+        drawing2.fillStyle = "black"
+        drawing2.fillRect(event.offsetX - 135, transformIntY(locationTemp), 113,15)
+        drawing2.closePath()
+        drawing2.beginPath()
+        drawing2.fillStyle = "white"
+        drawing2.fillText(locationTemp +" "+ "°C", event.offsetX - 130 , transformIntY(locationTemp) +10)
+        drawing2.fillText(dateX[whatDayIsIt],event.offsetX - 80,transformIntY(locationTemp) +10)
+        drawing2.closePath()}
+    else if(whatDayIsIt < 60 && locationTemp < 30){
+        drawing2.beginPath()
+        drawing2.fillStyle = "black"
+        drawing2.fillRect(event.offsetX + 22, transformIntY(locationTemp) - 15, 113,15)
+        drawing2.closePath()
+        drawing2.beginPath()
+        drawing2.fillStyle = "white"
+        drawing2.fillText(locationTemp +" "+ "°C", event.offsetX + 28 , transformIntY(locationTemp) - 5)
+        drawing2.fillText(dateX[whatDayIsIt],event.offsetX + 75,transformIntY(locationTemp) -5)
+        drawing2.closePath()}
+    drawing2.stroke()
+    drawing2.closePath()
+
+
 
 
 }
