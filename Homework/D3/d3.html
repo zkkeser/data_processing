@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+<body>
+
+    <p>This is a paragraph</p>
+
+    <svg width="720" height="120">
+        <circle cx="40" cy="60" r="10"></circle>
+
+        <circle cx="40" cy="60" r="10"></circle>
+
+        <circle cx="40" cy="60" r="10"></circle>
+    </svg>
+    <script>
+        d3.csv("data.csv", function(data) {
+            data.forEach(function(d) {
+              d.date = d.date;
+              d.close = +d.close;
+          })});
+
+    </script>
+</body>
+</html>
