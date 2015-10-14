@@ -1,16 +1,201 @@
 <!DOCTYPE html>
-<html>
+<meta charset="utf-8">
 <body>
-<link rel="stylesheet" type="text/css" href="d3map.css">
-<script src="http://d3js.org/topojson.v1.min.js"></script>
-<script src="http://rawgithub.com/markmarkoh/datamaps/master/dist/datamaps.none.min.js"></script>
-<script src="node_modules/datamaps/dist/datamaps.world.min.js"></script>
+<script src="ajax.js"></script>
+<script src="json.js"></script>
+<script src="datamaps.js"></script>
+<h2>D3 map showing GDP  (so far only in Europe)</h2>
+<pre style="color:green" >Top 33%</pre><pre style="color:orange">Middle 33%</pre><pre style="color:red">Bottom 33%</pre>
+<div id="map" style="position: relative; width: 500px; height: 250px;"></div>
+<script>
 
-    <div id="container" style="position: relative; width: 500px; height: 300px;">
+var election = new Datamap({
+  scope: 'world',
+  element: document.getElementById('map'),
+  geographyConfig: {
+    highlightBorderColor: 'black',
+   popupTemplate: function(geography, data) {
+      return '<div class="hoverinfo">' + geography.properties.name + ' '+ 'GDP:' +  data.GDP + ' '
+    },
+    highlightBorderWidth: 1
+  },
 
-    </div>
-    <script>
-        var map = new Datamap({element: document.getElementById('container')});
-    </script>
+  fills: {
+  'top33': 'green',
+  'mid33': 'orange',
+  'bot33': 'red',
+  defaultFill: 'grey'
+},
+data:{
+  "ALB": {
+      "fillKey": "bot33",
+      "GDP": 13.262
+  },
+  "AUT": {
+      "fillKey": "mid33",
+      "GDP": 427.123
+  },
+  "BLR": {
+      "fillKey": "mid33",
+      "GDP": 76.139
+  },
+  "BEL": {
+      "fillKey": "top33",
+      "GDP": 534.672
+  },
+  "BIH": {
+      "fillKey": "bot33",
+      "GDP": 17.977
+  },
+  "BGR": {
+      "fillKey": "bot33",
+      "GDP": 55.837
+  },
+  "HRV": {
+      "fillKey": "bot33",
+      "GDP": 57.159
+  },
+  "CYP": {
+      "fillKey": "bot33n",
+      "GDP": 23.269
+  },
+  "CZE": {
+      "fillKey": "mid33",
+      "GDP": 205.658
+  },
+  "DNK": {
+      "fillKey": "mid33",
+      "GDP": 340.806
+  },
+  "EST": {
+      "fillKey": "bot33",
+      "GDP": 25.953
+  },
+  "FIN": {
+      "fillKey": "mid33",
+      "GDP": 271.165
+  },
+  "FRA": {
+      "fillKey": "top33",
+      "GDP": 2846.889
+  },
+  "DEU": {
+      "fillKey": "top33",
+      "GDP": 3859.547
+  },
+  "GRC": {
+      "fillKey": "mid33",
+      "GDP": 238.023
+  },
+  "HUN": {
+      "fillKey": "mid33",
+      "GDP": 137.104
+  },
+  "ISL": {
+      "fillKey": "bot33",
+      "GDP": 16.693
+  },
+  "IRL": {
+      "fillKey": "mid33",
+      "GDP": 246.438
+  },
+  "ITA": {
+      "fillKey": "top33",
+      "GDP": 2147.952
+  },
+  "LVA": {
+      "fillKey": "bot33",
+      "GDP": 31.970
+  },
+  "LTU": {
+      "fillKey": "bot33",
+      "GDP": 48.232
+  },
+  "LUX": {
+      "fillKey": "mid33",
+      "GDP": 62.395
+  },
+  "MKD": {
+      "fillKey": "bot33",
+      "GDP": 11.342
+  },
+  "MLT": {
+      "fillKey": "bot33",
+      "GDP": 10.582
+  },
+  "MDA": {
+      "fillKey": "bot33",
+      "GDP": 7.944
+  },
+  "NLD": {
+      "fillKey": "top33",
+      "GDP": 866.354
+  },
+  "NOR": {
+      "fillKey": "top33",
+      "GDP": 500.244
+  },
+  "POL": {
+      "fillKey": "top33",
+      "GDP": 546.644
+  },
+  "PRT": {
+      "fillKey": "mid33",
+      "GDP": 230.012
+  },
+  "ROU": {
+      "fillKey": "mid33",
+      "GDP": 199.950
+  },
+  "RUS": {
+      "fillKey": "top33",
+      "GDP": 1857.461
+  },
+  "SMR": {
+      "fillKey": "bot33",
+      "GDP": 1.786
+  },
+  "SRB": {
+      "fillKey": "bot33",
+      "GDP": 43.866
+  },
+  "SVK": {
+      "fillKey": "mid33",
+      "GDP": 99.971
+  },
+  "SVN": {
+      "fillKey": "bot33",
+      "GDP": 49.506
+  },
+  "ESP": {
+      "fillKey": "top33",
+      "GDP": 1406.855
+  },
+  "SWE": {
+      "fillKey": "top33",
+      "GDP": 570.137
+  },
+  "CHE": {
+      "fillKey": "top33",
+      "GDP": 712.050
+  },
+  "UKR": {
+      "fillKey": "mid33",
+      "GDP": 130.660
+  },
+  "GBR": {
+      "fillKey": "top33",
+      "GDP": 2945.146
+  },
+  "XKX": {
+      "fillKey": "bot33",
+      "GDP": 7.318
+  },
+  "MNE": {
+      "fillKey": "bot33",
+      "GDP": 4.462
+  }
+}
+});
+</script>
 </body>
-</html>
