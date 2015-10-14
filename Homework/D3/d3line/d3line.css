@@ -1,0 +1,12 @@
+path {
+            stroke: #295BFF;
+            stroke-width: 1;
+            fill: none;
+        }
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    stroke-width: 2;
+}

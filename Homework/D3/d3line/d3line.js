@@ -26,14 +26,17 @@ var templine = d3.svg.line()
     .x(function(d) { return x(d.date) })
     .y(function(d) { return y(d.temp) })
 
+
+
 //Create our SVG canvas to draw in with full width and height (so plus margins)
 var svg = d3.select("body").append("svg").attr("width",width+margin.left+margin.right).attr("height", height+margin.top+margin.bottom)
     .append("g").attr("transform","translate(" + margin.left + "," + margin.top+ ")");
 
 
+
 //Yay! this finally loads the data! :)
 //http://stackoverflow.com/questions/14986435/d3-csv-data-loading
-d3.csv("data.csv", function(data) {
+d3.csv("d3linedata.csv", function(data) {
     data.forEach(function(d) {
         d.date = parseDate(d.date);
         d.temp = +d.temp/10;
@@ -47,12 +50,11 @@ d3.csv("data.csv", function(data) {
     //Add path for the line with "line" as class
     svg.append("path").attr("class","line").attr("d",templine(data));
 
-    // Add the X Axis and move it to the bottom of the graph
+    // Add the X axis and move it to the bottom of the graph
     svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
 
-    // Add the Y Axis
+    // Add the Y axis
     svg.append("g").attr("class", "y axis").call(yAxis);
-
 
     });
 
