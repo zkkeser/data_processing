@@ -53,8 +53,26 @@ d3.csv("d3linedata.csv", function(data) {
     // Add the X axis and move it to the bottom of the graph
     svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
 
+     //X axis label http://stackoverflow.com/questions/11189284/d3-axis-labeling
+    svg.append("text")
+        .attr("class", "x label")
+        .attr("text-anchor", "end")
+        .attr("x", width)
+        .attr("y", height - 6)
+        .text("Months");
+
     // Add the Y axis
     svg.append("g").attr("class", "y axis").call(yAxis);
+
+
+    //Y axis label http://stackoverflow.com/questions/11189284/d3-axis-labeling
+    svg.append("text")
+        .attr("class", "y label")
+        .attr("text-anchor", "end")
+        .attr("y", 6)
+        .attr("dy", ".75em")
+        .attr("transform", "rotate(-90)")
+        .text("Temperature in °C");
 
     });
 
