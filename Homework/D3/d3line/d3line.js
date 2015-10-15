@@ -26,13 +26,18 @@ var templine = d3.svg.line()
     .x(function(d) { return x(d.date) })
     .y(function(d) { return y(d.temp) })
 
-
+var tip = d3.tip()
+     .attr('class', 'd3-tip')
+     .offset([-10, 0])
+     .html(function (d) {
+     return "<strong> Temp:</strong> <span style='color:blue'>" + d.temp + "</span>";
+ })
 
 //Create our SVG canvas to draw in with full width and height (so plus margins)
 var svg = d3.select("body").append("svg").attr("width",width+margin.left+margin.right).attr("height", height+margin.top+margin.bottom)
     .append("g").attr("transform","translate(" + margin.left + "," + margin.top+ ")");
 
-
+svg.call(tip);
 
 //Yay! this finally loads the data! :)
 //http://stackoverflow.com/questions/14986435/d3-csv-data-loading
@@ -74,5 +79,19 @@ d3.csv("d3linedata.csv", function(data) {
         .attr("transform", "rotate(-90)")
         .text("Temperature in °C");
 
+     svg.selectAll(".circle")
+     .data(data)
+     .enter()
+     .append("svg:circle")
+     .attr("class", "circle")
+     .attr("cx", function (d, i) {
+     return x(d.date);
+ })
+     .attr("cy", function (d, i) {
+     return y(d.temp);
+ })
+     .attr("r", 2)
+     .on('mouseover', tip.show)
+     .on('mouseout', tip.hide)
     });
 
