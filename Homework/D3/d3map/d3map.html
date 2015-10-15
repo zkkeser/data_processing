@@ -6,7 +6,7 @@
 <script src="datamaps.js"></script>
 <h2>D3 map showing GDP  (so far only in Europe)</h2>
 <pre style="color:green" >Top 33%</pre><pre style="color:orange">Middle 33%</pre><pre style="color:red">Bottom 33%</pre>
-<div id="map" style="position: relative; width: 500px; height: 250px;"></div>
+<div id="map" style="position: relative; width: 800px; height: 600px;"></div>
 <script>
 
 var gdpmap = new Datamap({
@@ -197,7 +197,9 @@ data:{
   }
 }
 });
-
+var zoom = gdpmap.svg[0][0]
+    zoom.setAttribute("viewBox", "300 200 300 10")
+console.log(zoom)
 </script>
 <pre>
     The chosen colors are base on human intuition: Green generally means
